@@ -7,7 +7,7 @@ import pandas as pd
 
 from models import Question, Subject, Use
 
-application = app = FastAPI(title="QCM questions API")
+app = FastAPI(title="QCM questions API")
 
 security = HTTPBasic()
 
