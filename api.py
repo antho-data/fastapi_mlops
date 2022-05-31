@@ -76,3 +76,7 @@ async def get_questions(question: Question, user: any = Depends(get_current_user
     questions.to_csv("questions.csv", index=False)
 
     return Response("Created", status_code=201)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
