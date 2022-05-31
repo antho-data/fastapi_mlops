@@ -40,6 +40,10 @@ def get_current_user_info(credentials: HTTPBasicCredentials = Depends(security))
 
     return {"username": credentials.username, "role": user["role"]}
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
 
 @app.get("/questions", response_model=List[Question])
 async def get_questions(
