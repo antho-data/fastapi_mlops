@@ -1,0 +1,28 @@
+<link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
+
+<img class="fit-picture"
+     src="https://www.bigdataparis.com/2020/wp-content/uploads/sites/3/2019/07/Logo-Datascientest.png"
+     alt="Fièrement propulsé par Datascientest">
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>QA form</title>
+</head>
+<body>
+<form action="/subject_choose">
+  <label for="subject">Choisir le sujet du QCM:</label>
+  <select id="subject" name="subject">
+    <option value="bdd">BDD</option>
+    <option value="system">Systèmes distribués</option>
+    <option value="data">Streaming de données</option>
+    <option value="docker">Docker</option>
+    <option value="classification">Classification</option>
+    <option value="ml">Machine Learning</option>
+    <option value="auto">Automation</option>
+  </select>
+  <input type="submit">
+</form>
+</body>
+</html>

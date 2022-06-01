@@ -1,32 +1,34 @@
-from enum import Enum
-from typing import Optional
-from pydantic import BaseModel
+from sqlalchemy import Boolean, Column, Integer, String, Enum, VARCHAR
+
+from database import Base
+from schemas import Role
 
 
-class Use(str, Enum):
-    admission_test = "Test de positionnement"
-    validation_test = "Test de validation"
-    total_bootcamp = "Total Bootcamp"
+class User(Base):
+    __tablename__ = "users"
+    __table_args__ = {"sqlite_autoincrement": True}
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    username = Column(String, unique=True, index=True)
+    full_name = Column(String)
+    hashed_password = Column(String)
+    otp_secret = Column(String)
+    disabled = Column(Boolean, default=False)
+    role = Column(Enum(Role))
 
 
-class Subject(str, Enum):
-    database = "BDD"
-    distributed_systems = "Systèmes distribués"
-    streaming = "Streaming de données"
-    docker = "Docker"
-    classification = "Classification"
-    data_science = "Data Science"
-    machine_learning = "Machine Learning"
-    automation = "Automation"
+class Question(Base):
+    __tablename__ = "questions"
+    __table_args__ = {"sqlite_autoincrement": True}
 
-
-class Question(BaseModel):
-    question: str
-    subject: Optional[Subject]
-    use: Optional[Use]
-    correct: Optional[str]
-    responseA: str
-    responseB: str
-    responseC: Optional[str]
-    responseD: Optional[str]
-    remark: Optional[str]
+    id = Column(Integer, primary_key=True, nullable=False)
+    question = Column(String, unique=True)
+    subject = Column(String)
+    correct = Column(VARCHAR(4))
+    use = Column(String)
+    responseA = Column(String)
+    responseB = Column(String)
+    responseC = Column(String)
+    responseD = Column(String)
+    remark = Column(String)
