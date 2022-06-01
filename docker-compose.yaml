@@ -1,0 +1,25 @@
+version: "3.3"
+
+services:
+  api:
+    image: anthodata/fastapi_mlops:latest
+    container_name: fastapi_mlops
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app-http.rule=Host(`tech-net.fr`)
+      - traefik.http.routers.app-http.tls=true
+      - traefik.http.routers.app-http.tls.certresolver=letsencrypt
+
+  traefik:
+    image: traefik:v2.7
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PWD/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - traefik-public-certificates:/certificates
+
+volumes:
+  traefik-public-certificates:
